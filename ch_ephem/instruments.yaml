@@ -1,0 +1,125 @@
+---
+# This is a mapping containing known instrument positions and geometry.
+#
+# * East Latitude and North Longitude are given in degrees.
+# * Altitude above mean sea level is in metres.
+# * Rotation of the primary beam is degrees anti-clockwise looking down from
+#   above (e.g. westward from north)
+# * Roll of the cylinder(s) is degrees eastward from vertical, clockwise
+#   looking North along the focal line.
+# * Offset of the antenna zero-point is metres in the right-handed
+#   tangent-space anchored at (lat,lon,alt):
+#     * a positive X offset is eastward
+#     * a positive Y offset is northward
+#     * a positive Z offset is upward
+#
+# All parameters must be specified.  Malformed records will be
+# ignored.
+
+# Latitude, longitude and altitude from `ch_util.ephemeris`
+# Rotations, rolls and offsets     from `ch_util.tools`
+
+# The following comment has been extracted from `ch_util.tools`:
+#
+# Currently the position between the Pathfinder and 26m have been
+# calibrated with holography, but positions between CHIME and
+# Pathfinder/26m have not (they were determined from high-res
+# satellite images and are only approximate).  We need to
+# use CHIME holography data to constrain distance [x, y, z] between
+# CHIME and 26m.  I then recommend defining our coordinate system
+# such that center of CHIME array is the origin (so leaving variable
+# chime.offset alone, and updating pathfinder.offset and galt.offset
+# appropriately.)
+
+# CHIME telescope at DRAO
+#
+# Calvin derived the horizontal position of the center of the focal lines...
+# ...and the elevation of the focal line from survey coordinates:
+chime:
+  latitude: 49.3207092194
+  longitude: -119.6236774310
+  altitude: 555.372
+  # See DocLib #695 for more information.
+  rotation: -0.071
+  roll: 0
+  offset:
+    x: 0
+    y: 0
+    z: 0
+
+# Galt 26-m telescope at DRAO.  Lat, lon, alt is for CHIME
+galt:
+  latitude: 49.3207092194
+  longitude: -119.6236774310
+  altitude: 555.372
+  rotation: 0
+  roll: 0
+  offset:
+    x: 254.162124
+    y: 21.853934
+    z: 18.93
+
+# GBO/TONE Outrigger
+#
+# Calvin also positioned the GBO/TONE Outrigger similarly.
+tone:
+  latitude: 38.4292962636
+  longitude: -79.8451625395
+  altitude: 810
+  rotation: 0
+  roll: 0
+  offset:
+    x: 0
+    y: 0
+    z: 0
+
+# KKO Outrigger
+#
+# Rough position for outriggers.
+# These will be updated as positioning gets refined.
+# https://bao.chimenet.ca/doc/documents/1727
+# See Doclib #1530 and #1121 for more information.
+kko:
+  latitude: 49.41905
+  longitude: -120.5253
+  altitude: 835.
+  rotation: 0.6874
+  roll: 0.5888
+  offset:
+    x: 0
+    y: 0
+    z: 0
+
+gbo:
+  latitude: 38.436122
+  longitude: -79.827922
+  altitude: 826.01
+  rotation: -27.3745
+  roll: -30.0871
+  offset:
+    x: 0
+    y: 0
+    z: 0
+
+hco:
+  latitude: 40.8171082
+  longitude: -121.4689584
+  altitude: 1019.86
+  rotation: -0.8023
+  roll: 1.0556
+  offset:
+    x: 0
+    y: 0
+    z: 0
+
+# Pathfinder at DRAO.  Lat, lon, alt is for CHIME
+pathfinder:
+  latitude: 49.3207092194
+  longitude: -119.6236774310
+  altitude: 555.372
+  rotation: 1.986
+  roll: 0
+  offset:
+    x: 373.754961
+    y: -54.649866
+    z: 0
