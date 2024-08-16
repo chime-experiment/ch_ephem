@@ -58,7 +58,7 @@ _lsd_start = datetime.datetime(2013, 11, 15)
 _observers = None
 
 # tangent-space offset representation.
-_offset = namedtuple("Offset", ["x", "y", "z"])
+Offset = namedtuple("Offset", ["x", "y", "z"])
 
 
 class Observer(CaputObserver):
@@ -94,7 +94,7 @@ class Observer(CaputObserver):
         super().__init__(lon, lat, alt, lsd_start, sf_wrapper)
         self.rotation = rot
         self.roll = roll
-        self.offset = _offset(*offset)
+        self.offset = Offset(*offset)
 
 
 def all() -> dict[str, Observer]:
