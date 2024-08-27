@@ -41,3 +41,6 @@ nosetests.xml
 # OS-specific
 *.DS_Store
 
+# Sphinx
+doc/_autosummary
+doc/_build

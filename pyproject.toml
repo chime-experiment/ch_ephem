@@ -23,6 +23,13 @@ dependencies = [
 test = [
   "pytest >= 7.0"
 ]
+doc = [
+    "numpydoc",
+    "PyYAML",
+    "Sphinx",
+    "sphinx_rtd_theme",
+    "sphinxcontrib-katex"
+]
 
 [tool.setuptools.package-data]
 "ch_ephem" = ["*.yaml"]
