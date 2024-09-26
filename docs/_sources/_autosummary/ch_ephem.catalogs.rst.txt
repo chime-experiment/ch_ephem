@@ -1,0 +1,13 @@
+﻿ch\_ephem.catalogs
+==================
+
+.. automodule:: ch_ephem.catalogs
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      list
+      load
+   
