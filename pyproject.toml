@@ -14,7 +14,7 @@ license = {file = "LICENSE"}
 dependencies = [
     "caput @ git+https://github.com/radiocosmology/caput.git",
     "skyfield >= 1.10",
-    "numpy >= 1.16,<2",
+    "numpy >= 1.24",
     "pytz",
     "pyyaml",
 ]
