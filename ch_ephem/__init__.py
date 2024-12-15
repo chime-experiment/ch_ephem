@@ -5,13 +5,12 @@ Instrument Observrers and General Ephemeris Routines
 
 Any ephemeris routine which needs to know the location of the
 observer on the Earth are accessible via instrument Observer
-instances obtainable through :py:meth:`ch_ephem.observers.get`:
+instances importable from :py:meth:`ch_ephem.observers`:
 
-    >>> import ch_ephem.observers
-    >>> pathfinder = ch_ephem.observers.get("pathfinder")
+    >>> from ch_ephem.observers import pathfinder
     >>> pathfinder.solar_transit(...)
 
-The `Observer` instances returned by this method are subclassed from
+The `Observer` instances provided by this module are subclassed from
 `caput.time.Observers` and can be used as normal `caput` observers.
 Location and geometry data for the instrument observers are defined
 in the data file `instruments.yaml` provided as part of `ch_ephem`.
