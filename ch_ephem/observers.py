@@ -24,7 +24,7 @@ Observers objects found in this module subclass the standard
 `caput.time.Observer` to additionally provide rotation, roll and tangent-space
 offset for the instruments:
 
-    >>> pathfinder = ch_ephem.observers.get("pathfinder") 
+    >>> from ch_ephem.observers import pathfinder
     >>> print(pathfinder.rotation)
     1.986
     >>> print(pathfinder.roll)
@@ -173,7 +173,7 @@ def __getattr__(name: str) -> Observer:
 
     Raises
     ------
-    ValueError:
+    AttributeError:
         Data for the instrument named could not be found.
     """
 
