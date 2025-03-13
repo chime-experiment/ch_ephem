@@ -20,7 +20,7 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 import skyfield.starlib
-from caput.time import skyfield_wrapper, unix_to_skyfield_time
+from caput.time import unix_to_skyfield_time
 
 if TYPE_CHECKING:
     import caput.time
@@ -58,26 +58,10 @@ def cirs_radec(
     new_body : skyfield.starlib.Star
         Skyfield Star object with positions in ICRS coordinates
     """
-    import skyfield.functions
-    from skyfield.units import Angle
-
     if obs is None:
         from .observers import chime as obs
 
-    ts = skyfield_wrapper.timescale
-
-    epoch = ts.tt_jd(np.median(body.epoch))
-
-    pos = obs.skyfield_obs().at(epoch).observe(body)
-
-    # Matrix CT transforms from CIRS to ICRF (https://rhodesmill.org/skyfield/time.html)
-    r_au, dec, ra = skyfield.functions.to_polar(
-        np.einsum("ij...,j...->i...", epoch.CT, pos.position.au)
-    )
-
-    return skyfield.starlib.Star(
-        ra=Angle(radians=ra, preference="hours"), dec=Angle(radians=dec), epoch=epoch
-    )
+    return obs.cirs_radec(body)
 
 
 def star_cirs(
@@ -104,7 +88,10 @@ def star_cirs(
     body : skyfield.starlib.Star
         Star object in ICRS coordinates
     """
-    return cirs_radec(skyfield.starlib.Star(ra=ra, dec=dec, epoch=epoch), obs=obs)
+    if obs is None:
+        from .observers import chime as obs
+
+    return obs.star_cirs(ra, dec, epoch)
 
 
 def object_coords(
@@ -144,27 +131,7 @@ def object_coords(
     if obs is None:
         from .observers import chime as obs
 
-    if date is None:  # No date, get ICRS coords
-        if isinstance(body, skyfield.starlib.Star):
-            ra, dec = body.ra.radians, body.dec.radians
-        else:
-            raise ValueError(
-                "Body is not fixed, cannot calculate coordinates without a date."
-            )
-
-    else:  # Calculate CIRS position with all corrections
-        date = unix_to_skyfield_time(date)
-        radec = obs.skyfield_obs().at(date).observe(body).apparent().cirs_radec(date)
-
-        ra, dec = radec[0].radians, radec[1].radians
-
-    # If requested, convert to degrees
-    if deg:
-        ra = np.degrees(ra)
-        dec = np.degrees(dec)
-
-    # Return
-    return ra, dec
+    return obs.object_coords(body, date, deg)
 
 
 def hadec_to_bmxy(ha_cirs, dec_cirs):
