@@ -33,7 +33,9 @@ from .catalogs import load
 
 
 def get_source_dictionary(*catalogs: str) -> dict:
-    """Returns a dictionary containing :class:`skyfield.starlib.Star`
+    """Return a source dictionary.
+
+    Returns a dictionary containing :class:`skyfield.starlib.Star`
     objects for common radio point sources.  This is useful for
     obtaining the skyfield representation of a source from a string
     containing its name.
@@ -52,7 +54,6 @@ def get_source_dictionary(*catalogs: str) -> dict:
         Keys are source names.  Values are `skyfield.starlib.Star`
         objects.
     """
-
     src_dict = {}
     for catalog_name in reversed(catalogs):
         catalog = load(catalog_name)
@@ -60,7 +61,7 @@ def get_source_dictionary(*catalogs: str) -> dict:
         for name, info in catalog.items():
             names = info["alternate_names"]
             if name not in names:
-                names = [name] + names
+                names = [name, *names]
             src_dict[name] = skyfield_star_from_ra_dec(
                 info["ra"], info["dec"], tuple(names)
             )

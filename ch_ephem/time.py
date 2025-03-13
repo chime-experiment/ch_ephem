@@ -9,13 +9,13 @@ Time Functions
 """
 
 from __future__ import annotations
-from typing import Optional, Any
 
-import re
 import datetime
-from pytz import timezone
+import re
+from typing import Any
 
-from caput.time import datetime_to_unix, unix_to_skyfield_time, Observer
+from caput.time import Observer, datetime_to_unix, unix_to_skyfield_time
+from pytz import timezone
 
 
 def parse_date(datestring: str) -> datetime.datetime:
@@ -30,11 +30,12 @@ def parse_date(datestring: str) -> datetime.datetime:
     -------
     date : datetime.datetime
         A python datetime object in UTC.
+
     """
     rm = re.match("([0-9]{8})-([A-Z]{3})", datestring)
     if rm is None:
         msg = (
-            "Wrong format for datestring: {0}.".format(datestring)
+            f"Wrong format for datestring: {datestring}."
             + "\nShould be YYYYMMDD-AAA, "
             + "where AAA is one of [UTC,EST,EDT,PST,PDT]"
         )
@@ -50,20 +51,18 @@ def parse_date(datestring: str) -> datetime.datetime:
         try:
             tzoffset = tzs[tz.upper()]
         except KeyError:
-            print("Time zone {} not known. Known time zones:".format(tz))
+            print(f"Time zone {tz} not known. Known time zones:")
             for key, value in tzs.items():
                 print(key, value)
-            print("Using UTC{:+.1f}.".format(tzoffset))
+            print(f"Using UTC{tzoffset:+.1f}.")
 
     return datetime.datetime.strptime(datestring, "%Y%m%d") - datetime.timedelta(
         hours=tzoffset
     )
 
 
-def utc_lst_to_mjd(
-    datestring: str, lst: float, obs: Optional[Observer] = None
-) -> float:
-    """Convert date string and LST to corresponding modified Julian Day
+def utc_lst_to_mjd(datestring: str, lst: float, obs: Observer | None = None) -> float:
+    """Convert date string and LST to corresponding modified Julian Day.
 
     Parameters
     ----------
@@ -79,6 +78,7 @@ def utc_lst_to_mjd(
     -------
     mjd : float
         Modified Julian Date corresponding to the given time.
+
     """
     if obs is None:
         from .observers import chime as obs
@@ -106,7 +106,6 @@ def chime_local_datetime(*args: Any) -> datetime.datetime:
         Timezone naive date and time but converted to UTC.
 
     """
-
     tz = timezone("Canada/Pacific")
     dt_naive = datetime.datetime(*args)
     if dt_naive.tzinfo:

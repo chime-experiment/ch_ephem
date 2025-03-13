@@ -1,4 +1,4 @@
-"""CHIME ephemeris pointing routines
+"""CHIME ephemeris pointing routines.
 
 Functions
 =========
@@ -7,7 +7,6 @@ Functions
 """
 
 from __future__ import annotations
-from typing import List
 
 import numpy as np
 from skyfield.units import Angle
@@ -16,14 +15,16 @@ from skyfield.units import Angle
 def galt_pointing_model_ha(
     ha_in: Angle,
     dec_in: Angle,
-    a: List[float] = [-5.872, -0.5292, 5.458, -0.076, -0.707, 0.0, 0.0],
+    a: list[float] = [-5.872, -0.5292, 5.458, -0.076, -0.707, 0.0, 0.0],
 ) -> Angle:
-    """Calculate pointing correction in hour angle for the Galt Telescope
+    """Galt pointing model hour angle.
+
+    Calculate pointing correction in hour angle for the Galt Telescope
     See description of the pointing model by Lewis Knee: CHIME doclib #754
 
     Parameters
     ----------
-    ha, dec : Skyfield Angle objects
+    ha_in, dec_in : Skyfield Angle objects
         Target hour angle and declination
 
     a : list of floats
@@ -37,7 +38,6 @@ def galt_pointing_model_ha(
     correction : Angle
         Angular offset in hour angle
     """
-
     ha = ha_in.radians
     dec = dec_in.radians
 
@@ -58,14 +58,16 @@ def galt_pointing_model_ha(
 def galt_pointing_model_dec(
     ha_in: Angle,
     dec_in: Angle,
-    b: List[float] = [1.081, 0.707, -0.076, 0.0, 0.0, 0.0, 0.0],
+    b: list[float] = [1.081, 0.707, -0.076, 0.0, 0.0, 0.0, 0.0],
 ) -> Angle:
-    """Calculate pointing correction in declination for the Galt Telescope
+    """Galt pointing model declination.
+
+    Calculate pointing correction in declination for the Galt Telescope
     See description of the pointing model by Lewis Knee: CHIME doclib #754
 
     Parameters
     ----------
-    ha, dec : Skyfield Angle objects
+    ha_in, dec_in : Skyfield Angle objects
         Target hour angle and declination
 
     b : list of floats
@@ -79,7 +81,6 @@ def galt_pointing_model_dec(
     correction : Angle
         Angular offset in hour angle
     """
-
     ha = ha_in.radians
     dec = dec_in.radians
 

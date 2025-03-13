@@ -1,4 +1,4 @@
-"""CHIME co-ordinate transformations
+"""CHIME co-ordinate transformations.
 
 Functions
 =========
@@ -14,34 +14,36 @@ Functions
 """
 
 from __future__ import annotations
+
+import warnings
 from typing import TYPE_CHECKING
 
 import numpy as np
 import skyfield.starlib
-
 from caput.time import skyfield_wrapper, unix_to_skyfield_time
 
 if TYPE_CHECKING:
-    from typing import Optional, Tuple, Union
-    import skyfield.vectorlib
+    import caput.time
     import skyfield.jpllib
     import skyfield.timelib
     import skyfield.units
-    import caput.time
+    import skyfield.vectorlib
 
-    SkyfieldSource = Union[
-        skyfield.starlib.Star,
-        skyfield.vectorlib.VectorSum,
-        skyfield.jpllib.ChebyshevPosition,
-    ]
+    SkyfieldSource = (
+        skyfield.starlib.Star
+        | skyfield.vectorlib.VectorSum
+        | skyfield.jpllib.ChebyshevPosition
+    )
 
 del TYPE_CHECKING
 
 
 def cirs_radec(
-    body: skyfield.starlib.Star, obs: Optional[caput.time.Observer] = None
+    body: skyfield.starlib.Star, obs: caput.time.Observer | None = None
 ) -> skyfield.starlib.Star:
-    """Converts a Skyfield body in CIRS coordinates at a given epoch to
+    """Convert CIRS to ICRS.
+
+    Converts a Skyfield body in CIRS coordinates at a given epoch to
     ICRS coordinates observed from `obs`.
 
     Parameters
@@ -56,9 +58,8 @@ def cirs_radec(
     new_body : skyfield.starlib.Star
         Skyfield Star object with positions in ICRS coordinates
     """
-
-    from skyfield.units import Angle
     import skyfield.functions
+    from skyfield.units import Angle
 
     if obs is None:
         from .observers import chime as obs
@@ -83,10 +84,11 @@ def star_cirs(
     ra: skyfield.units.Angle,
     dec: skyfield.units.Angle,
     epoch: skyfield.timelib.Time,
-    obs: Optional[caput.time.Observer] = None,
+    obs: caput.time.Observer | None = None,
 ) -> skyfield.starlib.Star:
-    """Wrapper for `skyfield.starlib.Star` that creates a position given CIRS
-    coordinates observed from `obs`.
+    """Create wrapper for `skyfield.starlib.Star`.
+
+    Creates a position given CIRS coordinates observed from `obs`.
 
     Parameters
     ----------
@@ -102,17 +104,16 @@ def star_cirs(
     body : skyfield.starlib.Star
         Star object in ICRS coordinates
     """
-
     return cirs_radec(skyfield.starlib.Star(ra=ra, dec=dec, epoch=epoch), obs=obs)
 
 
 def object_coords(
     body: SkyfieldSource,
-    date: Optional[float] = None,
+    date: float | None = None,
     deg: bool = False,
-    obs: Optional[caput.time.Observer] = None,
-) -> Tuple[float, float]:
-    """Calculates the RA and DEC of the source.
+    obs: caput.time.Observer | None = None,
+) -> tuple[float, float]:
+    """Calculate the RA and DEC of a source.
 
     Gives the ICRS coordinates if no date is given (=J2000), or if a date is
     specified gives the CIRS coordinates at that epoch.
@@ -140,7 +141,6 @@ def object_coords(
     ra, dec: float
         Position of the source.
     """
-
     if obs is None:
         from .observers import chime as obs
 
@@ -184,8 +184,8 @@ def hadec_to_bmxy(ha_cirs, dec_cirs):
         the beam-model coordinate conventions:
         https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions
     """
-
     from caput.interferometry import rotate_ypr, sph_to_ground
+
     from .observers import chime
 
     # Convert CIRS coordinates to CHIME "ground fixed" XYZ coordinates,
@@ -202,13 +202,15 @@ def hadec_to_bmxy(ha_cirs, dec_cirs):
     ypr = np.array([np.deg2rad(-chime.rotation), 0, 0])
     chx_rot, chy_rot, chz_rot = rotate_ypr(ypr, chx, chy, chz)
 
-    # Convert rotated CHIME "ground fixed" XYZ coordinates to spherical polar coordinates
-    # with the pole towards almost-North and using CHIME's meridian as the prime meridian.
+    # Convert rotated CHIME "ground fixed" XYZ coordinates to spherical polar
+    # coordinates with the pole towards almost-North and using CHIME's meridian as the
+    # prime meridian.
     # Note that the azimuthal angle theta in these spherical polar coordinates increases
-    # to the West (to ensure that phi and theta here have the same meaning as the variables
-    # with the same names in the beam_model package and DocLib #1203).
+    # to the West (to ensure that phi and theta here have the same meaning as the
+    # variables with the same names in the beam_model package and DocLib #1203).
     # phi (polar angle): almost-North = 0 deg; zenith = 90 deg; almost-South = 180 deg
-    # theta (azimuthal angle): almost-East = -90 deg; zenith = 0 deg; almost-West = +90 deg
+    # theta (azimuthal angle): almost-East = -90 deg; zenith = 0 deg;
+    # almost-West = +90 deg
     phi = np.arccos(chy_rot)
     theta = np.arctan2(-chx_rot, +chz_rot)
 
@@ -238,9 +240,8 @@ def bmxy_to_hadec(bmx, bmy):
     dec_cirs : array_like
         The CIRS Declination in degrees.
     """
-    import warnings
+    from caput.interferometry import ground_to_sph, rotate_ypr
 
-    from caput.interferometry import rotate_ypr, ground_to_sph
     from .observers import chime
 
     # Convert CHIME/FRB beam model XY position to spherical polar coordinates
@@ -250,7 +251,8 @@ def bmxy_to_hadec(bmx, bmy):
     # (to ensure that phi and theta here have the same meaning as the variables
     # with the same names in the beam_model package and DocLib #1203).
     # phi (polar angle): almost-North = 0 deg; zenith = 90 deg; almost-South = 180 deg
-    # theta (azimuthal angle): almost-East = -90 deg; zenith = 0 deg; almost-West = +90 deg
+    # theta (azimuthal angle): almost-East = -90 deg; zenith = 0 deg;
+    # almost-West = +90 deg
     phi = np.pi / 2.0 - np.deg2rad(bmy)
     theta = np.deg2rad(bmx) / np.sin(phi)
 
@@ -284,9 +286,9 @@ def bmxy_to_hadec(bmx, bmy):
 
 def get_range_rate(
     source: SkyfieldSource,
-    date: Union[float, list],
-    obs: Optional[caput.time.Observer] = None,
-) -> Union[float, np.array]:
+    date: float | list,
+    obs: caput.time.Observer | None = None,
+) -> float | np.array:
     """Calculate rate at which distance between observer and source changes.
 
     Parameters
@@ -319,7 +321,6 @@ def get_range_rate(
     It is unclear if the latter should be taken into account for this Doppler
     shift calculation, but its effects are negligible.
     """
-
     if hasattr(source.ra._degrees, "__iter__") and hasattr(date, "__iter__"):
         raise ValueError(
             "Only one of `source` and `date` can contain multiple entries."
@@ -344,18 +345,18 @@ def get_range_rate(
     # Dot product of observer velocity and source position gives observer
     # velocity in direction of source; flip sign to get range rate (positive
     # for observer and source moving appart)
-    range_rate = -np.sum(obs_vel_m_per_s.T * source_pos_norm.T, axis=-1)
-
-    return range_rate
+    return -np.sum(obs_vel_m_per_s.T * source_pos_norm.T, axis=-1)
 
 
 def peak_ra(
     body: SkyfieldSource,
-    date: float = None,
+    date: float | None = None,
     deg: bool = False,
-    obs: Optional[caput.time.Observer] = None,
+    obs: caput.time.Observer | None = None,
 ):
-    """Calculates the right ascension where a source is expected to peak
+    """Calculate peak RA for a body.
+
+    Calculates the right ascension where a source is expected to peak
     in the beam.  This is different than the transit RA for observers which
     are rotated with-respect-to north.
 
@@ -378,7 +379,6 @@ def peak_ra(
     peak_ra : float
         RA when the transiting source peaks.
     """
-
     if obs is None:
         from .observers import chime as obs
 
