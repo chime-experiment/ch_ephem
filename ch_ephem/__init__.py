@@ -1,4 +1,4 @@
-"""CHIME ephemeris routines
+"""CHIME ephemeris routines.
 
 Instrument Observrers and General Ephemeris Routines
 ====================================================
@@ -65,7 +65,8 @@ and returns a dict containing the parsed JSON representation of the catalog:
 
     >>> import ch_ephem.catalogs
     >>> ch_ephem.catalogs.list()
-    ['atnf_psrcat', 'hfb_target_list', 'primary_calibrators_perley2016', 'specfind_v2_5Jy_vollmer2009']
+    ['atnf_psrcat', 'hfb_target_list', 'primary_calibrators_perley2016',
+     'specfind_v2_5Jy_vollmer2009']
     >>> perley2016 = ch_ephem.catalogs.load('primary_calibrators_perley2016')
     >>> perley2016["CAS_A"]["ra"]
     350.86642
@@ -86,13 +87,13 @@ Note: the submodules `observers` and `sources` read data from disk at import tim
     time
 """
 
-__all__ = ["catalogs", "coord", "pointing", "time", "__version__"]
+__all__ = ["__version__", "catalogs", "coord", "pointing", "time"]
 
 # We deliberately do not import .observers and .sources here
 # because they both perform reads from disk
-from . import catalogs, coord, pointing, time
+from importlib.metadata import PackageNotFoundError, version
 
-from importlib.metadata import version, PackageNotFoundError
+from . import catalogs, coord, pointing, time
 
 try:
     __version__ = version("ch_ephem")

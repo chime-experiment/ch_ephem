@@ -1,4 +1,4 @@
-"""Test ch_ephem.observers"""
+"""Test ch_ephem.observers."""
 
 import pickle
 
@@ -7,7 +7,6 @@ from ch_ephem import observers
 
 def test_pickle_observers():
     """Observers should be picklable."""
-
     # These are all small powers of two to
     # avoid floating-point shennanigans
     test = observers.Observer(lat=1, lon=2, alt=4, rot=8, roll=16, offset=(32, 64, 128))

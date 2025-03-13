@@ -1,4 +1,4 @@
-"""Observers for CHIME instruments
+"""Observers for CHIME instruments.
 
 This module provides `caput.time.Observer` objects for CHIME instruments.
 Position data for the instruments comes from the `instruments.yaml` file
@@ -44,11 +44,11 @@ Functions
 from __future__ import annotations
 
 import datetime
-import warnings
 import pathlib
-import yaml
+import warnings
 from collections import namedtuple
 
+import yaml
 from caput.time import Observer as CaputObserver
 
 # LSD start time.  This is the same for all observers
@@ -98,17 +98,17 @@ class Observer(CaputObserver):
 
 
 def all() -> dict[str, Observer]:
-    """Returns a dict of all available Observers, keyed by name."""
+    """Return a dict of all available Observers, keyed by name."""
     global _observers
     if _observers is None:
         with pathlib.Path(__file__).with_name("instruments.yaml").open() as f:
             data = yaml.safe_load(f)
 
-        _observers = dict()
+        _observers = {}
 
         for inst in data:
             # Vet YAML record
-            missing = list()
+            missing = []
             for key in "latitude", "longitude", "altitude", "rotation", "roll":
                 if key not in data[inst]:
                     missing.append(key)
@@ -176,7 +176,6 @@ def __getattr__(name: str) -> Observer:
     AttributeError:
         Data for the instrument named could not be found.
     """
-
     # Load observers from disk, if necessary
     observers = all()
 

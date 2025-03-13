@@ -1,4 +1,4 @@
-"""CHIME ephemeris source catalogues
+"""CHIME ephemeris source catalogues.
 
 Functions
 =========
@@ -8,11 +8,11 @@ Functions
 """
 
 from __future__ import annotations
-from typing import TYPE_CHECKING
 
 import glob
 import json
 import pathlib
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -27,7 +27,6 @@ def list() -> list[str]:
     catalogs : list
         A list with the names of available catalogs
     """
-
     cats = sorted(glob.glob("*.json", root_dir=pathlib.Path(__file__).parent))
 
     # Strip ".json" off the end
