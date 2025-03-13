@@ -1,0 +1,14 @@
+﻿ch\_ephem.time
+==============
+
+.. automodule:: ch_ephem.time
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      chime_local_datetime
+      parse_date
+      utc_lst_to_mjd
+   
