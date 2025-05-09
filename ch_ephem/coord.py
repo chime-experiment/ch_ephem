@@ -151,7 +151,7 @@ def hadec_to_bmxy(ha_cirs, dec_cirs):
         the beam-model coordinate conventions:
         https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions
     """
-    from caput.interferometry import rotate_ypr, sph_to_ground
+    from caput.coordinates.spherical import rotate_ypr, sph_to_ground
 
     from .observers import chime
 
@@ -207,7 +207,7 @@ def bmxy_to_hadec(bmx, bmy):
     dec_cirs : array_like
         The CIRS Declination in degrees.
     """
-    from caput.interferometry import ground_to_sph, rotate_ypr
+    from caput.coordinates.spherical import ground_to_sph, rotate_ypr
 
     from .observers import chime
 
