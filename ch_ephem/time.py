@@ -14,7 +14,9 @@ import datetime
 import re
 from typing import Any
 
-from caput.time import Observer, datetime_to_unix, unix_to_skyfield_time
+from caput.astro.observer import Observer
+from caput.astro.skyfield import unix_to_skyfield_time
+from caput.astro.time import datetime_to_unix
 from pytz import timezone
 
 
@@ -70,7 +72,7 @@ def utc_lst_to_mjd(datestring: str, lst: float, obs: Observer | None = None) -> 
         Date.  The string is parsed using `parse_date` (q.v.).
     lst : float
         Local sidereal time at the observer in decimal hours
-    obs : caput.time.Observer or None
+    obs : caput.astro.observer.Observer or None
         The observer.  If not given, or None, the CHIME
         instrument will be used.
 
