@@ -1,6 +1,6 @@
 """CHIME ephemeris routines.
 
-Instrument Observrers and General Ephemeris Routines
+Instrument Observers and General Ephemeris Routines
 ====================================================
 
 Any ephemeris routine which needs to know the location of the
@@ -44,7 +44,7 @@ later, so if you're unsure you are recommended to seek some advice.
 Radio Source Catalogs
 =====================
 
-This package provides several radio source catalogues used by CHIME.  The
+This package provides several radio source catalogues used by CHIME. The
 standard radio source catalogue used by CHIME is available as
 `ch_ephem.sources.source_dictionary`:
 
@@ -59,17 +59,8 @@ The four standard CHIME cailbrators are also available by name:
     <Angle 23h 23m 27.94s>
 
 Additional catalogues which are not part of the standard radio source catalogue
-are also available through the `ch_ephem.catalogs` module.  Any catalog can be
-accessed using :py:meth:`ch_ephem.catalogs.load`, which takes a catalogue name
-and returns a dict containing the parsed JSON representation of the catalog:
-
-    >>> import ch_ephem.catalogs
-    >>> ch_ephem.catalogs.list()
-    ['atnf_psrcat', 'hfb_target_list', 'primary_calibrators_perley2016',
-     'specfind_v2_5Jy_vollmer2009']
-    >>> perley2016 = ch_ephem.catalogs.load('primary_calibrators_perley2016')
-    >>> perley2016["CAS_A"]["ra"]
-    350.86642
+are also available through the `radiocosmology/fluxcat` package
+<https://github.com/radiocosmology/fluxcat/>
 
 Submodules
 ==========
@@ -79,7 +70,6 @@ Note: the submodules `observers` and `sources` read data from disk at import tim
 .. autosummary::
     :toctree: _autosummary
 
-    catalogs
     coord
     observers
     pointing
@@ -87,13 +77,13 @@ Note: the submodules `observers` and `sources` read data from disk at import tim
     time
 """
 
-__all__ = ["__version__", "catalogs", "coord", "pointing", "time"]
+__all__ = ["__version__", "coord", "pointing", "time"]
 
 # We deliberately do not import .observers and .sources here
 # because they both perform reads from disk
 from importlib.metadata import PackageNotFoundError, version
 
-from . import catalogs, coord, pointing, time
+from . import coord, pointing, time
 
 try:
     __version__ = version("ch_ephem")
