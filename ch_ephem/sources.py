@@ -28,8 +28,7 @@ Functions
 from __future__ import annotations
 
 from caput.time import skyfield_star_from_ra_dec
-
-from .catalogs import load
+from fluxcat.catalogs import load
 
 
 def get_source_dictionary(*catalogs: str) -> dict:
