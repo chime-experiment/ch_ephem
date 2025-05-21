@@ -13,6 +13,7 @@ dynamic = ["readme", "version"]
 license = {file = "LICENSE"}
 dependencies = [
     "caput @ git+https://github.com/radiocosmology/caput.git",
+    "fluxcat @ git+https://github.com/radiocosmology/fluxcat.git",
     "skyfield >= 1.10",
     "numpy >= 1.24",
     "pytz",
@@ -33,7 +34,6 @@ doc = [
 
 [tool.setuptools.package-data]
 "ch_ephem" = ["*.yaml"]
-"ch_ephem.catalogs" = ["*.json"]
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.md"], content-type = "text/markdown"}
