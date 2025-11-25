@@ -243,7 +243,7 @@ def bmxy_to_hadec(bmx, bmy):
 
     # Undo correction for CHIME telescope rotation with respect to North
     ypr = np.array([np.deg2rad(chime.rotation), 0, 0])
-    chx, chy, chz = rotate_ypr(ypr, chx_rot, chy_rot, chz_rot)
+    chx, chy, _ = rotate_ypr(ypr, chx_rot, chy_rot, chz_rot)
 
     # Convert CHIME "ground fixed" XYZ coordinates to CIRS hour angle and declination
     ha_cirs, dec_cirs = ground_to_sph(chx, chy, np.deg2rad(chime.latitude))
