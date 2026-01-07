@@ -1,7 +1,7 @@
 ---
 # This is a mapping containing known instrument positions and geometry.
 #
-# * East Latitude and North Longitude are given in degrees.
+# * East Longitude and North Latitude are given in degrees.
 # * Altitude above mean sea level is in metres.
 # * Rotation of the primary beam is degrees anti-clockwise looking down from
 #   above (e.g. westward from north)
