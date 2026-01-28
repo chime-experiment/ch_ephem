@@ -20,14 +20,14 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 import skyfield.starlib
-from caput.time import unix_to_skyfield_time
+from caput.astro.skyfield import unix_to_skyfield_time
 
 if TYPE_CHECKING:
-    import caput.time
     import skyfield.jpllib
     import skyfield.timelib
     import skyfield.units
     import skyfield.vectorlib
+    from caput.astro.observer import Observer
 
     SkyfieldSource = (
         skyfield.starlib.Star
@@ -39,7 +39,7 @@ del TYPE_CHECKING
 
 
 def cirs_radec(
-    body: skyfield.starlib.Star, obs: caput.time.Observer | None = None
+    body: skyfield.starlib.Star, obs: Observer | None = None
 ) -> skyfield.starlib.Star:
     """Convert CIRS to ICRS.
 
@@ -50,7 +50,7 @@ def cirs_radec(
     ----------
     body : skyfield.starlib.Star
         Skyfield Star object with positions in CIRS coordinates.
-    obs : `caput.time.Observer` or None
+    obs : `Observer` or None
         The observer instance to use. If not supplied use `chime`.
 
     Returns
@@ -68,7 +68,7 @@ def star_cirs(
     ra: skyfield.units.Angle,
     dec: skyfield.units.Angle,
     epoch: skyfield.timelib.Time,
-    obs: caput.time.Observer | None = None,
+    obs: Observer | None = None,
 ) -> skyfield.starlib.Star:
     """Create wrapper for `skyfield.starlib.Star`.
 
@@ -80,7 +80,7 @@ def star_cirs(
         RA and dec of the source in CIRS coordinates
     epoch : skyfield.api.Time
         Time of the observation
-    obs : `caput.time.Observer` or None
+    obs : `Observer` or None
         The observer instance to use. If not supplied use `chime`.
 
     Returns
@@ -98,7 +98,7 @@ def object_coords(
     body: SkyfieldSource,
     date: float | None = None,
     deg: bool = False,
-    obs: caput.time.Observer | None = None,
+    obs: Observer | None = None,
 ) -> tuple[float, float]:
     """Calculate the RA and DEC of a source.
 
@@ -119,7 +119,7 @@ def object_coords(
         2000.
     deg : bool
         Return RA ascension in degrees if True, radians if false (default).
-    obs : `caput.time.Observer` or None
+    obs : `Observer` or None
         An observer instance to use. If not supplied use `chime`. For many
         calculations changing from this default will make little difference.
 
@@ -254,8 +254,8 @@ def bmxy_to_hadec(bmx, bmy):
 def get_range_rate(
     source: SkyfieldSource,
     date: float | list,
-    obs: caput.time.Observer | None = None,
-) -> float | np.array:
+    obs: Observer | None = None,
+) -> float | np.ndarray:
     """Calculate rate at which distance between observer and source changes.
 
     Parameters
@@ -319,7 +319,7 @@ def peak_ra(
     body: SkyfieldSource,
     date: float | None = None,
     deg: bool = False,
-    obs: caput.time.Observer | None = None,
+    obs: Observer | None = None,
 ):
     """Calculate peak RA for a body.
 
@@ -338,7 +338,7 @@ def peak_ra(
     deg : bool
         If true, return right ascension in degrees.  Otherwise,
         right ascension will be returned in radians.
-    obs : caput.time.Observer or None
+    obs : Observer or None
         The observer.  If not given, or None, the CHIME instrument will be used.
 
     Returns

@@ -1,6 +1,6 @@
 """Observers for CHIME instruments.
 
-This module provides `caput.time.Observer` objects for CHIME instruments.
+This module provides `caput.astro.observer.Observer` objects for CHIME instruments.
 Position data for the instruments comes from the `instruments.yaml` file
 provided with this module.
 
@@ -21,7 +21,7 @@ function, which returns a dict of Observer objects:
     }
 
 Observers objects found in this module subclass the standard
-`caput.time.Observer` to additionally provide rotation, roll and tangent-space
+`caput.astro.observer.Observer` to additionally provide rotation, roll and tangent-space
 offset for the instruments:
 
     >>> from ch_ephem.observers import pathfinder
@@ -49,7 +49,7 @@ import warnings
 from collections import namedtuple
 
 import yaml
-from caput.time import Observer as CaputObserver
+from caput.astro.observer import Observer as CaputObserver
 
 # LSD start time.  This is the same for all observers
 _lsd_start = datetime.datetime(2013, 11, 15)
@@ -64,7 +64,7 @@ Offset = namedtuple("Offset", ["x", "y", "z"])
 class Observer(CaputObserver):
     """Representation of a local observer.
 
-    This class extends `caput.time.Observer` to add CHIME-specific geometry
+    This class extends `caput.astro.observer.Observer` to add CHIME-specific geometry
     parameters:
 
     Observer.rotation:

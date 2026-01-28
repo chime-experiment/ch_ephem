@@ -11,7 +11,7 @@ instances importable from :py:meth:`ch_ephem.observers`:
     >>> pathfinder.solar_transit(...)
 
 The `Observer` instances provided by this module are subclassed from
-`caput.time.Observers` and can be used as normal `caput` observers.
+`caput.astro.observer.Observer` and can be used as normal `caput` observers.
 Location and geometry data for the instrument observers are defined
 in the data file `instruments.yaml` provided as part of `ch_ephem`.
 
@@ -44,9 +44,8 @@ later, so if you're unsure you are recommended to seek some advice.
 Radio Source Catalogs
 =====================
 
-This package provides several radio source catalogues used by CHIME. The
-standard radio source catalogue used by CHIME is available as
-`ch_ephem.sources.source_dictionary`:
+This package provides access to the standard radio source catalogue used
+by CHIME, which is available as `ch_ephem.sources.source_dictionary`:
 
     >>> from ch_ephem.sources import source_dictionary
     >>> source_dictionary['CAS_A'].ra
