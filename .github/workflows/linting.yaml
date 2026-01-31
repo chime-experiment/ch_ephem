@@ -2,22 +2,22 @@ name: ch_ephem-linting
 on:
   pull_request:
     branches:
-    - master
+    - main
   push:
     branches:
-    - master
+    - main
 
 jobs:
 
   black-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
-    - name: Set up Python 3.13
-      uses: actions/setup-python@v5
+    - name: Set up Python
+      uses: actions/setup-python@v6
       with:
-        python-version: "3.13"
+        python-version: "3.14"
 
     - name: Install black
       run: pip install black
@@ -28,7 +28,7 @@ jobs:
   ruff-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Install ruff
       run: pip install ruff
