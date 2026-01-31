@@ -1,0 +1,13 @@
+﻿ch\_ephem.pointing
+==================
+
+.. automodule:: ch_ephem.pointing
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      galt_pointing_model_dec
+      galt_pointing_model_ha
+   

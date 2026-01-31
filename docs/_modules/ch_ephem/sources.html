@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ch_ephem.sources &mdash; ch_ephem 26.2.0.post1+git.1d94a036 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=56c8ced6"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ch_ephem
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ch_ephem</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ch_ephem.sources</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ch_ephem.sources</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;CHIME source objects.</span>
+
+<span class="sd">Note: This submodule reads the CHIME radio source catalogues from</span>
+<span class="sd">disk at import time.</span>
+
+<span class="sd">Constants</span>
+<span class="sd">=========</span>
+
+<span class="sd">:const:`source_dictionary`</span>
+<span class="sd">    The standard CHIME radio source catalogue.  A `dict`</span>
+<span class="sd">    whose keys are source names and whose values are</span>
+<span class="sd">    `skyfield.starlib.Star` objects.</span>
+<span class="sd">:const:`CasA`</span>
+<span class="sd">    :class:`skyfield.starlib.Star` representing Cassiopeia A.</span>
+<span class="sd">:const:`CygA`</span>
+<span class="sd">    :class:`skyfield.starlib.Star` representing Cygnus A.</span>
+<span class="sd">:const:`TauA`</span>
+<span class="sd">    :class:`skyfield.starlib.Star` representing Taurus A.</span>
+<span class="sd">:const:`VirA`</span>
+<span class="sd">    :class:`skyfield.starlib.Star` representing Virgo A.</span>
+
+<span class="sd">Functions</span>
+<span class="sd">=========</span>
+
+<span class="sd">- :py:meth:`get_source_dictionary`</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">caput.astro.skyfield</span><span class="w"> </span><span class="kn">import</span> <span class="n">skyfield_star_from_ra_dec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fluxcat.catalogs</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span>
+
+
+<div class="viewcode-block" id="get_source_dictionary">
+<a class="viewcode-back" href="../../_autosummary/ch_ephem.sources.html#ch_ephem.sources.get_source_dictionary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_source_dictionary</span><span class="p">(</span><span class="o">*</span><span class="n">catalogs</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a source dictionary.</span>
+
+<span class="sd">    Returns a dictionary containing :class:`skyfield.starlib.Star`</span>
+<span class="sd">    objects for common radio point sources.  This is useful for</span>
+<span class="sd">    obtaining the skyfield representation of a source from a string</span>
+<span class="sd">    containing its name.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    catalogs : str</span>
+<span class="sd">        Catalogue names.  These must be the basename of the json file</span>
+<span class="sd">        in the `ch_ephem/catalogs` directory.  If multiple catalogues</span>
+<span class="sd">        are provided, the first catalogue is favoured for any</span>
+<span class="sd">        overlapping sources.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    src_dict : dict</span>
+<span class="sd">        Keys are source names.  Values are `skyfield.starlib.Star`</span>
+<span class="sd">        objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">src_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">catalog_name</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">catalogs</span><span class="p">):</span>
+        <span class="n">catalog</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">catalog_name</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">catalog</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;alternate_names&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">]</span>
+            <span class="n">src_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">skyfield_star_from_ra_dec</span><span class="p">(</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;ra&quot;</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;dec&quot;</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">src_dict</span></div>
+
+
+
+<span class="c1"># Common radio point sources</span>
+<span class="n">source_dictionary</span> <span class="o">=</span> <span class="n">get_source_dictionary</span><span class="p">(</span>
+    <span class="s2">&quot;primary_calibrators_perley2016&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;specfind_v2_5Jy_vollmer2009&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;atnf_psrcat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hfb_target_list&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Calibrators</span>
+<span class="n">CasA</span> <span class="o">=</span> <span class="n">source_dictionary</span><span class="p">[</span><span class="s2">&quot;CAS_A&quot;</span><span class="p">]</span>
+<span class="n">CygA</span> <span class="o">=</span> <span class="n">source_dictionary</span><span class="p">[</span><span class="s2">&quot;CYG_A&quot;</span><span class="p">]</span>
+<span class="n">TauA</span> <span class="o">=</span> <span class="n">source_dictionary</span><span class="p">[</span><span class="s2">&quot;TAU_A&quot;</span><span class="p">]</span>
+<span class="n">VirA</span> <span class="o">=</span> <span class="n">source_dictionary</span><span class="p">[</span><span class="s2">&quot;VIR_A&quot;</span><span class="p">]</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2013–2024, The CHIME Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

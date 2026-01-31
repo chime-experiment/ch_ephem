@@ -1,0 +1,12 @@
+﻿ch\_ephem.sources
+=================
+
+.. automodule:: ch_ephem.sources
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_source_dictionary
+   

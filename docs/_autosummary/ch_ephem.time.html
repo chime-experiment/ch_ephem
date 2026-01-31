@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ch_ephem.time &mdash; ch_ephem 26.2.0.post1+git.1d94a036 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=56c8ced6"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="ch_ephem.sources" href="ch_ephem.sources.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ch_ephem
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../reference.html#instrument-observers-and-general-ephemeris-routines">Instrument Observers and General Ephemeris Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html#celestial-intermediate-reference-system">Celestial Intermediate Reference System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html#radio-source-catalogs">Radio Source Catalogs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../reference.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.coord.html">ch_ephem.coord</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.observers.html">ch_ephem.observers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.pointing.html">ch_ephem.pointing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.sources.html">ch_ephem.sources</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ch_ephem.time</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#time-functions">Time Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.time.chime_local_datetime"><code class="docutils literal notranslate"><span class="pre">chime_local_datetime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.time.parse_date"><code class="docutils literal notranslate"><span class="pre">parse_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.time.utc_lst_to_mjd"><code class="docutils literal notranslate"><span class="pre">utc_lst_to_mjd()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ch_ephem</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">ch_ephem.time</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/ch_ephem.time.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ch_ephem.time">
+<span id="ch-ephem-time"></span><h1>ch_ephem.time<a class="headerlink" href="#module-ch_ephem.time" title="Link to this heading"></a></h1>
+<p>CHIME ephemeris time routines.</p>
+<section id="time-functions">
+<h2>Time Functions<a class="headerlink" href="#time-functions" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ch_ephem.time.parse_date" title="ch_ephem.time.parse_date"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_date()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ch_ephem.time.utc_lst_to_mjd" title="ch_ephem.time.utc_lst_to_mjd"><code class="xref py py-meth docutils literal notranslate"><span class="pre">utc_lst_to_mjd()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ch_ephem.time.chime_local_datetime" title="ch_ephem.time.chime_local_datetime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">chime_local_datetime()</span></code></a></p></li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_ephem.time.chime_local_datetime" title="ch_ephem.time.chime_local_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chime_local_datetime</span></code></a>(*args)</p></td>
+<td><p>Create a <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code> object in Canada/Pacific timezone.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_ephem.time.parse_date" title="ch_ephem.time.parse_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_date</span></code></a>(datestring)</p></td>
+<td><p>Convert date string to a datetime object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_ephem.time.utc_lst_to_mjd" title="ch_ephem.time.utc_lst_to_mjd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utc_lst_to_mjd</span></code></a>(datestring, lst[, obs])</p></td>
+<td><p>Convert date string and LST to corresponding modified Julian Day.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.time.chime_local_datetime">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.time.</span></span><span class="sig-name descname"><span class="pre">chime_local_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="reference internal" href="../_modules/ch_ephem/time.html#chime_local_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.time.chime_local_datetime" title="Link to this definition"></a></dt>
+<dd><p>Create a <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code> object in Canada/Pacific timezone.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> – Any valid arguments to the constructor of <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code>
+except <em>tzinfo</em>. Local date and time at CHIME.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dt</strong> – Timezone naive date and time but converted to UTC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.time.parse_date">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.time.</span></span><span class="sig-name descname"><span class="pre">parse_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datestring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="reference internal" href="../_modules/ch_ephem/time.html#parse_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.time.parse_date" title="Link to this definition"></a></dt>
+<dd><p>Convert date string to a datetime object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>datestring</strong> (<em>str</em>) – Date as YYYYMMDD-AAA, where AAA is one of [UTC, EST, EDT, PST, PDT]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>date</strong> – A python datetime object in UTC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.time.utc_lst_to_mjd">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.time.</span></span><span class="sig-name descname"><span class="pre">utc_lst_to_mjd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datestring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Observer</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ch_ephem/time.html#utc_lst_to_mjd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.time.utc_lst_to_mjd" title="Link to this definition"></a></dt>
+<dd><p>Convert date string and LST to corresponding modified Julian Day.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datestring</strong> (<em>str</em>) – Date.  The string is parsed using <cite>parse_date</cite> (q.v.).</p></li>
+<li><p><strong>lst</strong> (<em>float</em>) – Local sidereal time at the observer in decimal hours</p></li>
+<li><p><strong>obs</strong> (<em>caput.astro.observer.Observer</em><em> or </em><em>None</em>) – The observer.  If not given, or None, the CHIME
+instrument will be used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>mjd</strong> – Modified Julian Date corresponding to the given time.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch_ephem.sources.html" class="btn btn-neutral float-left" title="ch_ephem.sources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2013–2024, The CHIME Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ch_ephem.coord &mdash; ch_ephem 26.2.0.post1+git.1d94a036 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=56c8ced6"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ch_ephem.observers" href="ch_ephem.observers.html" />
+    <link rel="prev" title="API Reference" href="../reference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ch_ephem
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../reference.html#instrument-observers-and-general-ephemeris-routines">Instrument Observers and General Ephemeris Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html#celestial-intermediate-reference-system">Celestial Intermediate Reference System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html#radio-source-catalogs">Radio Source Catalogs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../reference.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ch_ephem.coord</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.coord.bmxy_to_hadec"><code class="docutils literal notranslate"><span class="pre">bmxy_to_hadec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.coord.cirs_radec"><code class="docutils literal notranslate"><span class="pre">cirs_radec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.coord.get_range_rate"><code class="docutils literal notranslate"><span class="pre">get_range_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.coord.hadec_to_bmxy"><code class="docutils literal notranslate"><span class="pre">hadec_to_bmxy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.coord.object_coords"><code class="docutils literal notranslate"><span class="pre">object_coords()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.coord.peak_ra"><code class="docutils literal notranslate"><span class="pre">peak_ra()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch_ephem.coord.star_cirs"><code class="docutils literal notranslate"><span class="pre">star_cirs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.observers.html">ch_ephem.observers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.pointing.html">ch_ephem.pointing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.sources.html">ch_ephem.sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_ephem.time.html">ch_ephem.time</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ch_ephem</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">ch_ephem.coord</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/ch_ephem.coord.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ch_ephem.coord">
+<span id="ch-ephem-coord"></span><h1>ch_ephem.coord<a class="headerlink" href="#module-ch_ephem.coord" title="Link to this heading"></a></h1>
+<p>CHIME co-ordinate transformations.</p>
+<p class="rubric">Functions</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ch_ephem.coord.cirs_radec" title="ch_ephem.coord.cirs_radec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cirs_radec()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ch_ephem.coord.star_cirs" title="ch_ephem.coord.star_cirs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">star_cirs()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ch_ephem.coord.object_coords" title="ch_ephem.coord.object_coords"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object_coords()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ch_ephem.coord.hadec_to_bmxy" title="ch_ephem.coord.hadec_to_bmxy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hadec_to_bmxy()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ch_ephem.coord.bmxy_to_hadec" title="ch_ephem.coord.bmxy_to_hadec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bmxy_to_hadec()</span></code></a></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">range_rate()</span></code></p></li>
+<li><p><a class="reference internal" href="#ch_ephem.coord.peak_ra" title="ch_ephem.coord.peak_ra"><code class="xref py py-meth docutils literal notranslate"><span class="pre">peak_ra()</span></code></a></p></li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_ephem.coord.bmxy_to_hadec" title="ch_ephem.coord.bmxy_to_hadec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bmxy_to_hadec</span></code></a>(bmx, bmy)</p></td>
+<td><p>Convert CHIME/FRB beam-model XY coordinates to CIRS hour angle and declination.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_ephem.coord.cirs_radec" title="ch_ephem.coord.cirs_radec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cirs_radec</span></code></a>(body[, obs])</p></td>
+<td><p>Convert CIRS to ICRS.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_ephem.coord.get_range_rate" title="ch_ephem.coord.get_range_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_range_rate</span></code></a>(source, date[, obs])</p></td>
+<td><p>Calculate rate at which distance between observer and source changes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_ephem.coord.hadec_to_bmxy" title="ch_ephem.coord.hadec_to_bmxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hadec_to_bmxy</span></code></a>(ha_cirs, dec_cirs)</p></td>
+<td><p>Convert CIRS hour angle and declination to CHIME/FRB beam-model XY coordinates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_ephem.coord.object_coords" title="ch_ephem.coord.object_coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">object_coords</span></code></a>(body[, date, deg, obs])</p></td>
+<td><p>Calculate the RA and DEC of a source.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_ephem.coord.peak_ra" title="ch_ephem.coord.peak_ra"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_ra</span></code></a>(body[, date, deg, obs])</p></td>
+<td><p>Calculate peak RA for a body.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_ephem.coord.star_cirs" title="ch_ephem.coord.star_cirs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">star_cirs</span></code></a>(ra, dec, epoch[, obs])</p></td>
+<td><p>Create wrapper for <cite>skyfield.starlib.Star</cite>.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.coord.bmxy_to_hadec">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.coord.</span></span><span class="sig-name descname"><span class="pre">bmxy_to_hadec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bmx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bmy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_ephem/coord.html#bmxy_to_hadec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.coord.bmxy_to_hadec" title="Link to this definition"></a></dt>
+<dd><p>Convert CHIME/FRB beam-model XY coordinates to CIRS hour angle and declination.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bmx</strong> (<em>array_like</em>) – The CHIME/FRB beam model X and Y coordinates in degrees as defined in
+the beam-model coordinate conventions:
+<a class="reference external" href="https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions">https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions</a>
+X is degrees west from the meridian
+Y is degrees north from zenith</p></li>
+<li><p><strong>bmy</strong> (<em>array_like</em>) – The CHIME/FRB beam model X and Y coordinates in degrees as defined in
+the beam-model coordinate conventions:
+<a class="reference external" href="https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions">https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions</a>
+X is degrees west from the meridian
+Y is degrees north from zenith</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>ha_cirs</strong> (<em>array_like</em>) – The CIRS Hour Angle in degrees.</p></li>
+<li><p><strong>dec_cirs</strong> (<em>array_like</em>) – The CIRS Declination in degrees.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.coord.cirs_radec">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.coord.</span></span><span class="sig-name descname"><span class="pre">cirs_radec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">skyfield.starlib.Star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ch_ephem.observers.html#ch_ephem.observers.Observer" title="ch_ephem.observers.Observer"><span class="pre">Observer</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">skyfield.starlib.Star</span></span></span><a class="reference internal" href="../_modules/ch_ephem/coord.html#cirs_radec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.coord.cirs_radec" title="Link to this definition"></a></dt>
+<dd><p>Convert CIRS to ICRS.</p>
+<p>Converts a Skyfield body in CIRS coordinates at a given epoch to
+ICRS coordinates observed from <cite>obs</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<em>skyfield.starlib.Star</em>) – Skyfield Star object with positions in CIRS coordinates.</p></li>
+<li><p><strong>obs</strong> (<cite>Observer</cite> or None) – The observer instance to use. If not supplied use <cite>chime</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>new_body</strong> – Skyfield Star object with positions in ICRS coordinates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>skyfield.starlib.Star</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.coord.get_range_rate">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.coord.</span></span><span class="sig-name descname"><span class="pre">get_range_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SkyfieldSource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ch_ephem.observers.html#ch_ephem.observers.Observer" title="ch_ephem.observers.Observer"><span class="pre">Observer</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">np.ndarray</span></span></span><a class="reference internal" href="../_modules/ch_ephem/coord.html#get_range_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.coord.get_range_rate" title="Link to this definition"></a></dt>
+<dd><p>Calculate rate at which distance between observer and source changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> – Position(s) on the sky.</p></li>
+<li><p><strong>date</strong> – Unix time(s) for which to calculate range rate.</p></li>
+<li><p><strong>obs</strong> – An Observer instance to use. If not supplied use <cite>chime</cite>. For many
+calculations changing from this default will make little difference.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rate (in m/s) at which the distance between the observer and source
+changes (i.e., the velocity of observer in direction of source, but
+positive for observer and source moving appart). If either <cite>source</cite>
+or <cite>date</cite> contains multiple entries, <cite>range_rate</cite> will be an array.
+Otherwise, <cite>range_rate</cite> will be a float.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>range_rate</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Only one of <cite>source</cite> and <cite>date</cite> can contain multiple entries.</p>
+<p>This routine uses an <code class="xref py py-class docutils literal notranslate"><span class="pre">skyfield.positionlib.Apparent</span></code> object
+(rather than an <code class="xref py py-class docutils literal notranslate"><span class="pre">skyfield.positionlib.Astrometric</span></code> object) to find
+the velocity of the observatory and the position of the source. This
+accounts for the gravitational deflection and the aberration of light.
+It is unclear if the latter should be taken into account for this Doppler
+shift calculation, but its effects are negligible.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.coord.hadec_to_bmxy">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.coord.</span></span><span class="sig-name descname"><span class="pre">hadec_to_bmxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ha_cirs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec_cirs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_ephem/coord.html#hadec_to_bmxy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.coord.hadec_to_bmxy" title="Link to this definition"></a></dt>
+<dd><p>Convert CIRS hour angle and declination to CHIME/FRB beam-model XY coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ha_cirs</strong> (<em>array_like</em>) – The CIRS Hour Angle in degrees.</p></li>
+<li><p><strong>dec_cirs</strong> (<em>array_like</em>) – The CIRS Declination in degrees.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>bmx, bmy</strong> – The CHIME/FRB beam model X and Y coordinates in degrees as defined in
+the beam-model coordinate conventions:
+<a class="reference external" href="https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions">https://chime-frb-open-data.github.io/beam-model/#coordinate-conventions</a></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.coord.object_coords">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.coord.</span></span><span class="sig-name descname"><span class="pre">object_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SkyfieldSource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ch_ephem.observers.html#ch_ephem.observers.Observer" title="ch_ephem.observers.Observer"><span class="pre">Observer</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ch_ephem/coord.html#object_coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.coord.object_coords" title="Link to this definition"></a></dt>
+<dd><p>Calculate the RA and DEC of a source.</p>
+<p>Gives the ICRS coordinates if no date is given (=J2000), or if a date is
+specified gives the CIRS coordinates at that epoch.</p>
+<p>This also returns the <em>apparent</em> position, including abberation and
+deflection by gravitational lensing. This shifts the positions by up to
+20 arcseconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<em>skyfield source</em>) – skyfield.starlib.Star or skyfield.vectorlib.VectorSum or
+skyfield.jpllib.ChebyshevPosition body representing the source.</p></li>
+<li><p><strong>date</strong> (<em>float</em>) – Unix time at which to determine ra of source If None, use Jan 01
+2000.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em>) – Return RA ascension in degrees if True, radians if false (default).</p></li>
+<li><p><strong>obs</strong> (<cite>Observer</cite> or None) – An observer instance to use. If not supplied use <cite>chime</cite>. For many
+calculations changing from this default will make little difference.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ra, dec</strong> – Position of the source.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.coord.peak_ra">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.coord.</span></span><span class="sig-name descname"><span class="pre">peak_ra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SkyfieldSource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ch_ephem.observers.html#ch_ephem.observers.Observer" title="ch_ephem.observers.Observer"><span class="pre">Observer</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_ephem/coord.html#peak_ra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.coord.peak_ra" title="Link to this definition"></a></dt>
+<dd><p>Calculate peak RA for a body.</p>
+<p>Calculates the right ascension where a source is expected to peak
+in the beam.  This is different than the transit RA for observers which
+are rotated with-respect-to north.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<em>skyfield source</em>) – skyfield.starlib.Star or skyfield.vectorlib.VectorSum or
+skyfield.jpllib.ChebyshevPosition representing the source.</p></li>
+<li><p><strong>date</strong> (<em>float</em>) – Unix time at which to determine ra of source
+If None, 1 January, 2000 is used.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em>) – If true, return right ascension in degrees.  Otherwise,
+right ascension will be returned in radians.</p></li>
+<li><p><strong>obs</strong> (<a class="reference internal" href="ch_ephem.observers.html#ch_ephem.observers.Observer" title="ch_ephem.observers.Observer"><em>Observer</em></a><em> or </em><em>None</em>) – The observer.  If not given, or None, the CHIME instrument will be used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>peak_ra</strong> – RA when the transiting source peaks.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ch_ephem.coord.star_cirs">
+<span class="sig-prename descclassname"><span class="pre">ch_ephem.coord.</span></span><span class="sig-name descname"><span class="pre">star_cirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">skyfield.units.Angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">skyfield.units.Angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epoch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">skyfield.timelib.Time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ch_ephem.observers.html#ch_ephem.observers.Observer" title="ch_ephem.observers.Observer"><span class="pre">Observer</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">skyfield.starlib.Star</span></span></span><a class="reference internal" href="../_modules/ch_ephem/coord.html#star_cirs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ch_ephem.coord.star_cirs" title="Link to this definition"></a></dt>
+<dd><p>Create wrapper for <cite>skyfield.starlib.Star</cite>.</p>
+<p>Creates a position given CIRS coordinates observed from <cite>obs</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ra</strong> (<em>skyfield.api.Angle</em>) – RA and dec of the source in CIRS coordinates</p></li>
+<li><p><strong>dec</strong> (<em>skyfield.api.Angle</em>) – RA and dec of the source in CIRS coordinates</p></li>
+<li><p><strong>epoch</strong> (<em>skyfield.api.Time</em>) – Time of the observation</p></li>
+<li><p><strong>obs</strong> (<cite>Observer</cite> or None) – The observer instance to use. If not supplied use <cite>chime</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>body</strong> – Star object in ICRS coordinates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>skyfield.starlib.Star</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../reference.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch_ephem.observers.html" class="btn btn-neutral float-right" title="ch_ephem.observers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2013–2024, The CHIME Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; ch_ephem 26.2.0.post1+git.1d94a036 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=56c8ced6"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ch_ephem.coord" href="_autosummary/ch_ephem.coord.html" />
+    <link rel="prev" title="CHIME Ephemeris Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ch_ephem
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#instrument-observers-and-general-ephemeris-routines">Instrument Observers and General Ephemeris Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#celestial-intermediate-reference-system">Celestial Intermediate Reference System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#radio-source-catalogs">Radio Source Catalogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/ch_ephem.coord.html">ch_ephem.coord</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/ch_ephem.observers.html">ch_ephem.observers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/ch_ephem.pointing.html">ch_ephem.pointing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/ch_ephem.sources.html">ch_ephem.sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/ch_ephem.time.html">ch_ephem.time</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ch_ephem</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/reference.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ch_ephem">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-ch_ephem" title="Link to this heading"></a></h1>
+<p>CHIME ephemeris routines.</p>
+<section id="instrument-observers-and-general-ephemeris-routines">
+<h2>Instrument Observers and General Ephemeris Routines<a class="headerlink" href="#instrument-observers-and-general-ephemeris-routines" title="Link to this heading"></a></h2>
+<p>Any ephemeris routine which needs to know the location of the
+observer on the Earth are accessible via instrument Observer
+instances importable from <a class="reference internal" href="_autosummary/ch_ephem.observers.html#module-ch_ephem.observers" title="ch_ephem.observers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ch_ephem.observers()</span></code></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ch_ephem.observers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pathfinder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pathfinder</span><span class="o">.</span><span class="n">solar_transit</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>Observer</cite> instances provided by this module are subclassed from
+<cite>caput.astro.observer.Observer</cite> and can be used as normal <cite>caput</cite> observers.
+Location and geometry data for the instrument observers are defined
+in the data file <cite>instruments.yaml</cite> provided as part of <cite>ch_ephem</cite>.</p>
+</section>
+<section id="celestial-intermediate-reference-system">
+<h2>Celestial Intermediate Reference System<a class="headerlink" href="#celestial-intermediate-reference-system" title="Link to this heading"></a></h2>
+<p>The precession of the Earth’s axis gives noticeable shifts in object
+positions over the life time of CHIME. To minimise the effects of this we
+need to be careful and consistent with our ephemeris calculations.
+Historically Right Ascension has been given with respect to the Vernal
+Equinox which has a significant (and unnecessary) precession in the origin of
+the RA axis. To avoid this we use the new Celestial Intermediate Reference
+System which does not suffer from this issue.</p>
+<p>Practically this means that when calculating RA, DEC coordinates for a source
+position at a <em>given time</em> you must be careful to obtain CIRS coordinates
+(and not equinox based ones). Internally using <cite>ch_ephem.coord.object_coords</cite> does
+exactly that for you, so for any lookup of coordinates you should use that on
+your requested body.</p>
+<p>Note that the actual coordinate positions of sources must be specified using
+RA, DEC coordinates in ICRS (which is roughly equivalent to J2000). The
+purpose of <cite>object_coords</cite> is to transform into new RA, DEC coordinates taking
+into account the precession and nutation of the Earth’s polar axis since
+then.</p>
+<p>These kind of coordinate issues are tricky, confusing and hard to debug years
+later, so if you’re unsure you are recommended to seek some advice.</p>
+</section>
+<section id="radio-source-catalogs">
+<h2>Radio Source Catalogs<a class="headerlink" href="#radio-source-catalogs" title="Link to this heading"></a></h2>
+<p>This package provides access to the standard radio source catalogue used
+by CHIME, which is available as <cite>ch_ephem.sources.source_dictionary</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ch_ephem.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">source_dictionary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">source_dictionary</span><span class="p">[</span><span class="s1">&#39;CAS_A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ra</span>
+<span class="go">&lt;Angle 23h 23m 27.94s&gt;</span>
+</pre></div>
+</div>
+<p>The four standard CHIME cailbrators are also available by name:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ch_ephem.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">CasA</span><span class="p">,</span> <span class="n">CygA</span><span class="p">,</span> <span class="n">VirA</span><span class="p">,</span> <span class="n">TauA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CasA</span><span class="o">.</span><span class="n">ra</span>
+<span class="go">&lt;Angle 23h 23m 27.94s&gt;</span>
+</pre></div>
+</div>
+<p>Additional catalogues which are not part of the standard radio source catalogue
+are also available through the <cite>radiocosmology/fluxcat</cite> package
+&lt;<a class="reference external" href="https://github.com/radiocosmology/fluxcat/">https://github.com/radiocosmology/fluxcat/</a>&gt;</p>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<p>Note: the submodules <cite>observers</cite> and <cite>sources</cite> read data from disk at import time.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/ch_ephem.coord.html#module-ch_ephem.coord" title="ch_ephem.coord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coord</span></code></a></p></td>
+<td><p>CHIME co-ordinate transformations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/ch_ephem.observers.html#module-ch_ephem.observers" title="ch_ephem.observers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">observers</span></code></a></p></td>
+<td><p>Observers for CHIME instruments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/ch_ephem.pointing.html#module-ch_ephem.pointing" title="ch_ephem.pointing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pointing</span></code></a></p></td>
+<td><p>CHIME ephemeris pointing routines.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/ch_ephem.sources.html#module-ch_ephem.sources" title="ch_ephem.sources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sources</span></code></a></p></td>
+<td><p>CHIME source objects.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/ch_ephem.time.html#module-ch_ephem.time" title="ch_ephem.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time</span></code></a></p></td>
+<td><p>CHIME ephemeris time routines.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="CHIME Ephemeris Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_autosummary/ch_ephem.coord.html" class="btn btn-neutral float-right" title="ch_ephem.coord" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2013–2024, The CHIME Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
