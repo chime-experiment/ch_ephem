@@ -1,0 +1,20 @@
+﻿ch\_ephem.observers
+===================
+
+.. automodule:: ch_ephem.observers
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      all
+      reset
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Observer
+      Offset
+   

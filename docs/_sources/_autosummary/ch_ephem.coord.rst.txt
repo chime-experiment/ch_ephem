@@ -1,0 +1,18 @@
+﻿ch\_ephem.coord
+===============
+
+.. automodule:: ch_ephem.coord
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      bmxy_to_hadec
+      cirs_radec
+      get_range_rate
+      hadec_to_bmxy
+      object_coords
+      peak_ra
+      star_cirs
+   
